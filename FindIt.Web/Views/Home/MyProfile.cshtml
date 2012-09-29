@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/pages/profile.js"></script>
+}
+
+<h2>MyProfile</h2>
+<p>
+
+    <select style="width:200px" data-bind="options: locations,optionsText: function(item){ return item.Name();},selectedOptions:selectedLocations" size="5" multiple="true"></select>
+</p>

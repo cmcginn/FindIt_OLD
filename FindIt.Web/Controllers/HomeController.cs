@@ -33,5 +33,10 @@ namespace FindIt.Web.Controllers
 
             return View();
         }
+
+        public ActionResult MyProfile()
+        {
+            return View();
+        }
     }
 }

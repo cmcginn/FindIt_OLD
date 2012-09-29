@@ -10,6 +10,9 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using FindIt.Web.Filters;
 using FindIt.Web.Models;
+using FindIt.Data;
+using FindIt.Core.Entities;
+using FindIt.Core.Infrastructure;
 
 namespace FindIt.Web.Controllers
 {
@@ -17,9 +20,13 @@ namespace FindIt.Web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private readonly IWorkContext _workContext;
+        public AccountController(IWorkContext workContext)
+        {
+            _workContext = workContext;
+        }
         //
         // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -35,14 +42,27 @@ namespace FindIt.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            ActionResult result = null;
+            if (ModelState.IsValid)
             {
-                return RedirectToLocal(returnUrl);
+                using(var store = Storage.GetStore)
+                using (var session = store.OpenSession())
+                {
+                    var user = session.Query<User>().SingleOrDefault(x => x.UserName == model.UserName && x.Password == model.Password);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                        result = View(model);
+                    }
+                    else
+                    {
+                        _workContext.User = user;
+                        result = RedirectToLocal(returnUrl);
+                    }
+                }
+                
             }
-
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
+            return result;
         }
 
         //
@@ -79,8 +99,16 @@ namespace FindIt.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    using (var store = Storage.GetStore)
+                    using (var session = store.OpenSession())
+                    {
+                        var user = new User { UserName = model.UserName, Password = model.Password };
+                        session.Store(user);
+                        session.SaveChanges();
+                        _workContext.User = user;
+                    }
+                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    //WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

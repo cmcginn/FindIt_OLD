@@ -21,6 +21,7 @@ namespace FindIt.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -32,6 +33,9 @@ namespace FindIt.Web
             engineContext.RegisterTypes();
             EngineContext.Container = engineContext.Builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));
+            
+            //var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            //json.UseDataContractJsonSerializer = true;
         }
 
        
