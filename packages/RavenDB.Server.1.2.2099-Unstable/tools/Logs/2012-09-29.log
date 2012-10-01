@@ -30893,3 +30893,76 @@ select new { UserName = doc.UserName, Password = doc.Password }
 ",
 2012-09-29 12:55:23.1200,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
 2012-09-29 12:55:23.1200,Raven.Database.Server.HttpServer,Debug,"Request #2,670: GET     -     0 ms - Test       - 404 - /docs/Raven/Replication/Destinations",
+2012-09-29 12:56:25.4617,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Studio/Columns/Collection/Countries' was not found,
+2012-09-29 12:56:25.4617,Raven.Database.Server.HttpServer,Debug,"Request #2,671: GET     -     1 ms - Test       - 404 - /docs/Raven/Studio/Columns/Collection/Countries?noCache=2121594733",
+2012-09-29 12:56:25.4739,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Countries,
+2012-09-29 12:56:25.4739,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '76' was found,
+2012-09-29 12:56:25.4739,Raven.Database.Server.HttpServer,Debug,"Request #2,672: GET     -    19 ms - Test       - 200 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ACountries&start=0&pageSize=1&aggregation=None&noCache=-398378718",
+2012-09-29 12:56:25.4739,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Countries
+	Time: 14 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 1 returned out of 161 total.
+",
+2012-09-29 12:56:25.7149,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Countries,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '76' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '77' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '78' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '79' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '80' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '81' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '82' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '83' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '84' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '85' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '86' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '87' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '88' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '89' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '90' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '91' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '92' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '93' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '94' was found,
+2012-09-29 12:56:25.7149,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '95' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '96' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '97' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '98' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '99' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '100' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '101' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '102' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '103' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '104' was found,
+2012-09-29 12:56:25.7232,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '105' was found,
+2012-09-29 12:56:25.7232,Raven.Database.Server.HttpServer,Debug,"Request #2,673: GET     -    20 ms - Test       - 200 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ACountries&start=0&pageSize=30&aggregation=None&noCache=-892824833",
+2012-09-29 12:56:25.7232,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Countries
+	Time: 17 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 30 returned out of 161 total.
+",
+2012-09-29 12:56:29.7896,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Countries,
+2012-09-29 12:56:29.7896,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '86' was found,
+2012-09-29 12:56:29.7896,Raven.Database.Server.HttpServer,Debug,"Request #2,674: GET     -     6 ms - Test       - 200 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ACountries&start=10&pageSize=1&aggregation=None&noCache=1969544639",
+2012-09-29 12:56:29.7963,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Countries
+	Time: 5 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 1 returned out of 161 total.
+",
+2012-09-29 12:56:29.7963,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key '86' was found,
+2012-09-29 12:56:29.7963,Raven.Database.Server.HttpServer,Debug,"Request #2,675: GET     -     1 ms - Test       - 200 - /docs/86?noCache=-308079390",
+2012-09-29 12:56:35.0080,Raven.Database.Server.HttpServer,Debug,Error when using events transport,"System.AggregateException: One or more errors occurred. ---> System.Net.HttpListenerException: An operation was attempted on a nonexistent network connection
+   at System.Net.HttpResponseStream.BeginWrite(Byte[] buffer, Int32 offset, Int32 size, AsyncCallback callback, Object state)
+   at Raven.Database.Server.Abstractions.HttpListenerResponseAdapter.<>c__DisplayClass3.<WriteAsync>b__1(AsyncCallback callback, Object state) in c:\Builds\RavenDB-Unstable-v1.2\Raven.Database\Server\Abstractions\HttpListenerResponseAdapter.cs:line 115
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncImpl(Func`3 beginMethod, Func`2 endFunction, Action`1 endAction, Object state, TaskCreationOptions creationOptions)
+   at System.Threading.Tasks.TaskFactory.FromAsync(Func`3 beginMethod, Action`1 endMethod, Object state, TaskCreationOptions creationOptions)
+   at Raven.Database.Server.Abstractions.HttpListenerResponseAdapter.WriteAsync(String data) in c:\Builds\RavenDB-Unstable-v1.2\Raven.Database\Server\Abstractions\HttpListenerResponseAdapter.cs:line 114
+   --- End of inner exception stack trace ---
+---> (Inner Exception #0) System.Net.HttpListenerException (0x80004005): An operation was attempted on a nonexistent network connection
+   at System.Net.HttpResponseStream.BeginWrite(Byte[] buffer, Int32 offset, Int32 size, AsyncCallback callback, Object state)
+   at Raven.Database.Server.Abstractions.HttpListenerResponseAdapter.<>c__DisplayClass3.<WriteAsync>b__1(AsyncCallback callback, Object state) in c:\Builds\RavenDB-Unstable-v1.2\Raven.Database\Server\Abstractions\HttpListenerResponseAdapter.cs:line 115
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncImpl(Func`3 beginMethod, Func`2 endFunction, Action`1 endAction, Object state, TaskCreationOptions creationOptions)
+   at System.Threading.Tasks.TaskFactory.FromAsync(Func`3 beginMethod, Action`1 endMethod, Object state, TaskCreationOptions creationOptions)
+   at Raven.Database.Server.Abstractions.HttpListenerResponseAdapter.WriteAsync(String data) in c:\Builds\RavenDB-Unstable-v1.2\Raven.Database\Server\Abstractions\HttpListenerResponseAdapter.cs:line 114<---
+"
+2012-09-29 12:56:40.8051,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-09-29 12:56:40.9121,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,

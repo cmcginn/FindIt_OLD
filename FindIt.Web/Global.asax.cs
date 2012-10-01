@@ -1,9 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using FindIt.Core.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -30,10 +32,12 @@ namespace FindIt.Web
             var engineContext = EngineContext.CurrentContext;
             engineContext.Builder = new ContainerBuilder();            
             engineContext.Builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            engineContext.Builder.RegisterApiControllers(typeof(System.Web.Http.ApiController).Assembly);
             engineContext.RegisterTypes();
             EngineContext.Container = engineContext.Builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));
-            
+            engineContext.Builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
             //var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             //json.UseDataContractJsonSerializer = true;
         }

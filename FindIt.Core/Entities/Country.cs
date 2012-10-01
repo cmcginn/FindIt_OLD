@@ -14,7 +14,13 @@ namespace FindIt.Core.Entities
         public virtual string Name { get; set; }
         public virtual string ThreeLetterISOCode { get; set; }
         public virtual string TwoLetterISOCode { get; set; }
-        
+        ICollection<StateProvince> _StateProvinces;
+
+        public ICollection<StateProvince> StateProvinces
+        {
+            get { return _StateProvinces ?? (_StateProvinces = new List<StateProvince>()); }
+            set { _StateProvinces = value; }
+        }
         
     }
 }

@@ -178,7 +178,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\CommonApiController.cs" />
     <Compile Include="ApiControllers\LocationController.cs" />
+    <Compile Include="ApiControllers\UserProfileApiController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -191,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MyProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +251,55 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\yaml\add-ons\accessible-tabs\jquery.tabs.js" />
+    <Content Include="Content\yaml\add-ons\accessible-tabs\tabs.css" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\external_link.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\hcalendar.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\hcard.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-geo.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hatom.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-haudio.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar-add.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar-download.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard-add.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard-download.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hresume.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-rel-tag.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-xfn.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-child.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-colleague-met.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-colleague.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-friend-met.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-friend.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-me.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-parent.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-small.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-spouse.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-sweetheart-met.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-sweetheart.png" />
+    <Content Include="Content\yaml\add-ons\microformats\microformats.css" />
+    <Content Include="Content\yaml\add-ons\rtl-support\core\base-rtl.css" />
+    <Content Include="Content\yaml\add-ons\rtl-support\core\base-rtl.min.css" />
+    <Content Include="Content\yaml\add-ons\rtl-support\navigation\hlist-rtl.css" />
+    <Content Include="Content\yaml\add-ons\rtl-support\navigation\vlist-rtl.css" />
+    <Content Include="Content\yaml\add-ons\rtl-support\screen\typography-rtl.css" />
+    <Content Include="Content\yaml\add-ons\syncheight\jquery.syncheight.js" />
+    <Content Include="Content\yaml\core\base.css" />
+    <Content Include="Content\yaml\core\base.min.css" />
+    <Content Include="Content\yaml\core\iehacks.css" />
+    <Content Include="Content\yaml\core\iehacks.min.css" />
+    <Content Include="Content\yaml\core\js\yaml-focusfix.js" />
+    <Content Include="Content\yaml\forms\gray-theme.css" />
+    <Content Include="Content\yaml\navigation\hlist.css" />
+    <Content Include="Content\yaml\navigation\vlist.css" />
+    <Content Include="Content\yaml\print\print.css" />
+    <Content Include="Content\yaml\screen\grid-960-12.css" />
+    <Content Include="Content\yaml\screen\grid-960-16.css" />
+    <Content Include="Content\yaml\screen\screen-FULLPAGE-layout.css" />
+    <Content Include="Content\yaml\screen\screen-PAGE-layout.css" />
+    <Content Include="Content\yaml\screen\typography.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -266,6 +318,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout-mapping.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\pages\profile.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

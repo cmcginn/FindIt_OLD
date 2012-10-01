@@ -53,8 +53,10 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\SearchProfile.cs" />
     <Compile Include="Entities\StateProvince.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Infrastructure\EngineContext.cs" />
     <Compile Include="Infrastructure\IWorkContext.cs" />
     <Compile Include="Infrastructure\WorkContext.cs" />

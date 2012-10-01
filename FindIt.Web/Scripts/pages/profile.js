@@ -4,18 +4,31 @@ var profile = {
         locations: null,
         selectedLocations:null
     },
+    mapping:{
+        'stateProvinces': {
+            create: function (options) {
+                
+                return options.data;
+            }
+        }
+    },
     viewModel:null,
     init: function () {
         profile.loadModel();
     },
     loadModel: function () {
-        $.get('/api/Location', function (result, state) {
+        $.get('/api/CommonApi/GetCountries', function (result, state) {
             profile.model.locations = result;
-            //profile.model.selectedLocations = [result[0],result[1],result[20]];            
-            profile.viewModel = ko.mapping.fromJS(profile.model);
-            ko.applyBindings(profile.viewModel);
+            profile.onModelDataLoaded();
+
         });
 
+    },
+    onModelDataLoaded:function(){
+        if (profile.model.locations != null) {
+            profile.viewModel = ko.mapping.fromJS(profile.model,profile.mapping);
+            ko.applyBindings(profile.viewModel);
+        }
     }
 }
 
