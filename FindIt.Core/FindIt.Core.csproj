@@ -56,6 +56,7 @@
       <HintPath>..\packages\ScrapySharp.1.4.3\lib\ScrapySharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -67,12 +68,16 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Country.cs" />
-    <Compile Include="Entities\SearchProfile.cs" />
+    <Compile Include="Entities\Query.cs" />
     <Compile Include="Entities\StateProvince.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Infrastructure\EngineContext.cs" />
+    <Compile Include="Infrastructure\IPlugin.cs" />
     <Compile Include="Infrastructure\IWorkContext.cs" />
+    <Compile Include="Infrastructure\PluginAttribute.cs" />
+    <Compile Include="Infrastructure\PluginManager.cs" />
+    <Compile Include="Infrastructure\QueryPluginBase.cs" />
     <Compile Include="Infrastructure\WorkContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

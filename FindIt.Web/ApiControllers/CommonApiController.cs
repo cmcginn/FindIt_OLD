@@ -11,6 +11,13 @@ namespace FindIt.Web.ApiControllers
 {
     public class CommonApiController : ApiController
     {
+
+        private readonly IStorage _storage;
+        public CommonApiController(IStorage storage)
+        {
+            _storage = storage;
+        }
+
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
@@ -20,7 +27,7 @@ namespace FindIt.Web.ApiControllers
         public IEnumerable<Country> GetCountries()
         {
             List<Country> result = null;
-            using(var store = Storage.GetStore)
+            using(var store = _storage.DocumentStore)
             using (var session = store.OpenSession())
             {
                 result = session.GetCountries();

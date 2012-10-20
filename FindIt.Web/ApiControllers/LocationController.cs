@@ -11,11 +11,19 @@ namespace FindIt.Web.ApiControllers
 {
     public class LocationController : ApiController
     {
+        private readonly IStorage _storage;
+
+        public LocationController(IStorage storage)
+        {
+            _storage = storage;
+        }
+
         // GET api/<controller>
         public IEnumerable<Country> Get()
         {
             IEnumerable<Country> result = null;
-            using(var store = Storage.GetStore)
+            
+            using(var store = _storage.DocumentStore)
             using (var session = store.OpenSession())
             {
                 result = session.Query<Country>().ToList();

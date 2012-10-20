@@ -18,6 +18,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindIt.Core", "FindIt.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindIt.Data.Tests", "FindIt.Data.Tests\FindIt.Data.Tests.csproj", "{447CC203-02E1-405F-A957-FD15B5EA8EE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindIt.Core.Tests", "FindIt.Core.Tests\FindIt.Core.Tests.csproj", "{C4A97BD2-9196-4802-B06B-A0246AB5A10E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{1CA716AE-AEB5-4501-8B49-1567D288A8CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "Plugins\TestPlugin\TestPlugin.csproj", "{6D2F3AA4-72DF-424F-89BF-0BD8CD4A2653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,8 +49,19 @@ Global
 		{447CC203-02E1-405F-A957-FD15B5EA8EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{447CC203-02E1-405F-A957-FD15B5EA8EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{447CC203-02E1-405F-A957-FD15B5EA8EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A97BD2-9196-4802-B06B-A0246AB5A10E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A97BD2-9196-4802-B06B-A0246AB5A10E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A97BD2-9196-4802-B06B-A0246AB5A10E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A97BD2-9196-4802-B06B-A0246AB5A10E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D2F3AA4-72DF-424F-89BF-0BD8CD4A2653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D2F3AA4-72DF-424F-89BF-0BD8CD4A2653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D2F3AA4-72DF-424F-89BF-0BD8CD4A2653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D2F3AA4-72DF-424F-89BF-0BD8CD4A2653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D2F3AA4-72DF-424F-89BF-0BD8CD4A2653} = {1CA716AE-AEB5-4501-8B49-1567D288A8CE}
 	EndGlobalSection
 EndGlobal

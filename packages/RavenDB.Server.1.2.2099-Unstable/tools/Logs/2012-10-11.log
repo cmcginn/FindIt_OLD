@@ -1,0 +1,334 @@
+time,logger,level,message,exception
+2012-10-11 06:14:31.1664,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3220176896
+  PollingInterval     = 00:02:00",
+2012-10-11 06:14:31.3544,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096",
+2012-10-11 06:14:33.5506,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-10-11 06:14:33.6187,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-10-11 06:14:33.7257,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-10-11 06:14:34.7913,Raven.Database.Indexing.WorkContext,Warn,"Could not setup performance counters properly because of access permissions, perf counters will not be used","System.Security.SecurityException: Requested registry access is not allowed.
+   at Microsoft.Win32.RegistryKey.OpenSubKey(String name, Boolean writable)
+   at System.Diagnostics.PerformanceCounterLib.CreateRegistryEntry(String categoryName, PerformanceCounterCategoryType categoryType, CounterCreationDataCollection creationData, Boolean& iniRegistered)
+   at System.Diagnostics.PerformanceCounterLib.RegisterCategory(String categoryName, PerformanceCounterCategoryType categoryType, String categoryHelp, CounterCreationDataCollection creationData)
+   at System.Diagnostics.PerformanceCounterCategory.Create(String categoryName, String categoryHelp, PerformanceCounterCategoryType categoryType, CounterCreationDataCollection counterData)
+   at Raven.Database.Indexing.WorkContext.Init(String name) in c:\Builds\RavenDB-Unstable-v1.2\Raven.Database\Indexing\WorkContext.cs:line 314
+The Zone of the assembly that failed was:
+MyComputer"
+2012-10-11 06:14:34.8798,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-10-11 06:14:35.1193,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-10-11 06:14:35.1439,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-10-11 06:16:29.1374,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/Test' was found,
+2012-10-11 06:16:29.6696,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3220176896
+  PollingInterval     = 00:02:00",
+2012-10-11 06:16:29.6696,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096",
+2012-10-11 06:16:30.2677,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Country%2fStateProvinces%2fIndex:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Country_2fStateProvinces_2fIndex : AbstractViewGenerator
+{
+	public Index_Country_2fStateProvinces_2fIndex()
+	{
+		this.ViewText = @""docs.Countries.SelectMany(country => country.StateProvinces, (country, sp) => new {
+    Name = sp.Name
+})
+"";
+		this.ForEntityNames.Add(""Countries"");
+		this.AddMapDefinition(docs => docs.Where(__document => string.Equals(__document[""@metadata""][""Raven-Entity-Name""], ""Countries"", System.StringComparison.InvariantCultureIgnoreCase)).SelectMany((Func<dynamic, IEnumerable<dynamic>>)(country => (IEnumerable<dynamic>)(country.StateProvinces)), (Func<dynamic, dynamic, dynamic>)((country, sp) => new { Name = sp.Name, __document_id = country.__document_id })));
+		this.AddField(""Name"");
+		this.AddField(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Country_2fStateProvinces_2fIndex : AbstractViewGenerator
+{
+	public Index_Country_2fStateProvinces_2fIndex()
+	{
+		this.ViewText = @""docs.Countries.SelectMany(country => country.StateProvinces, (country, sp) => new {
+    Name = sp.Name
+})
+"";
+		this.ForEntityNames.Add(""Countries"");
+		this.AddMapDefinition(docs => docs.Where(__document => string.Equals(__document[""@metadata""][""Raven-Entity-Name""], ""Countries"", System.StringComparison.InvariantCultureIgnoreCase)).SelectMany((Func<dynamic, IEnumerable<dynamic>>)(country => (IEnumerable<dynamic>)(country.StateProvinces)), (Func<dynamic, dynamic, dynamic>)((country, sp) => new { Name = sp.Name, __document_id = country.__document_id })));
+		this.AddField(""Name"");
+		this.AddField(""__document_id"");
+	}
+}
+",
+2012-10-11 06:16:30.4555,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Country_StateProvinces:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Country_StateProvinces : AbstractViewGenerator
+{
+	public Index_Country_StateProvinces()
+	{
+		this.ViewText = @""from country in docs.Countries
+from stateProvince in country.StateProvinces
+select new {StateProvinceName = stateProvince.Name}
+"";
+		this.ForEntityNames.Add(""Countries"");
+		this.AddMapDefinition(docs => from country in docs
+			where string.Equals(country[""@metadata""][""Raven-Entity-Name""], ""Countries"", System.StringComparison.InvariantCultureIgnoreCase)
+			from stateProvince in country.StateProvinces
+			select new { StateProvinceName = stateProvince.Name, __document_id = country.__document_id });
+		this.AddField(""StateProvinceName"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""StateProvinces,Name"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""StateProvinces,Name"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Country_StateProvinces : AbstractViewGenerator
+{
+	public Index_Country_StateProvinces()
+	{
+		this.ViewText = @""from country in docs.Countries
+from stateProvince in country.StateProvinces
+select new {StateProvinceName = stateProvince.Name}
+"";
+		this.ForEntityNames.Add(""Countries"");
+		this.AddMapDefinition(docs => from country in docs
+			where string.Equals(country[""@metadata""][""Raven-Entity-Name""], ""Countries"", System.StringComparison.InvariantCultureIgnoreCase)
+			from stateProvince in country.StateProvinces
+			select new { StateProvinceName = stateProvince.Name, __document_id = country.__document_id });
+		this.AddField(""StateProvinceName"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""StateProvinces,Name"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""StateProvinces,Name"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-10-11 06:16:30.4555,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using System.Globalization;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-10-11 06:16:30.4555,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Country/StateProvinces/Index,
+2012-10-11 06:16:30.4555,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Country/StateProvinces/Index,
+2012-10-11 06:16:30.4757,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Country_StateProvinces,
+2012-10-11 06:16:30.4757,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Country_StateProvinces,
+2012-10-11 06:16:30.4757,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-10-11 06:16:30.4757,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-10-11 06:16:30.5267,Raven.Database.Indexing.WorkContext,Warn,"Could not setup performance counters properly because of access permissions, perf counters will not be used","System.Security.SecurityException: Requested registry access is not allowed.
+   at Microsoft.Win32.RegistryKey.OpenSubKey(String name, Boolean writable)
+   at System.Diagnostics.PerformanceCounterLib.CreateRegistryEntry(String categoryName, PerformanceCounterCategoryType categoryType, CounterCreationDataCollection creationData, Boolean& iniRegistered)
+   at System.Diagnostics.PerformanceCounterLib.RegisterCategory(String categoryName, PerformanceCounterCategoryType categoryType, String categoryHelp, CounterCreationDataCollection creationData)
+   at System.Diagnostics.PerformanceCounterCategory.Create(String categoryName, String categoryHelp, PerformanceCounterCategoryType categoryType, CounterCreationDataCollection counterData)
+   at Raven.Database.Indexing.WorkContext.Init(String name) in c:\Builds\RavenDB-Unstable-v1.2\Raven.Database\Indexing\WorkContext.cs:line 314
+The Zone of the assembly that failed was:
+MyComputer"
+2012-10-11 06:16:30.5267,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-10-11 06:16:30.5267,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-10-11 06:16:30.5327,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-10-11 06:16:30.9076,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/users' was found,
+2012-10-11 06:16:30.9076,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/ServerPrefixForHilo' was not found,
+2012-10-11 06:16:31.0956,Raven.Database.Server.HttpServer,Debug,"Request #   1: GET     - 1,993 ms - Test       - 200 - /queries/?&id=Raven/Hilo/users&id=Raven/ServerPrefixForHilo",
+2012-10-11 06:16:31.1858,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-10-11 06:16:31.1878,Raven.Database.Server.HttpServer,Debug,Request #   2: GET     -    16 ms - Test       - 404 - /docs/Raven/Replication/Destinations,
+2012-10-11 06:16:31.3998,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/users', update: True, ",
+2012-10-11 06:16:31.4138,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: PUT Raven/Hilo/users,
+2012-10-11 06:16:31.4267,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: ReducingExecuter, will wait for additional work",
+2012-10-11 06:16:31.4267,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/users with etag 00000000-0000-0f00-0000-000000000001,
+2012-10-11 06:16:31.4387,Raven.Database.Server.HttpServer,Debug,Request #   3: PUT     -   211 ms - Test       - 201 - /docs/Raven/Hilo/users,
+2012-10-11 06:16:31.5287,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0900-0000-000000000002,
+2012-10-11 06:16:31.5978,Raven.Database.Impl.DocumentRetriever,Debug,Trigger Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/users,
+2012-10-11 06:16:31.5978,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-10-11 06:16:31.6338,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-0900-0000-000000000002",
+2012-10-11 06:16:31.6338,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Country/StateProvinces/Index, no indexing will be performed, updating to 00000000-0000-0f00-0000-000000000001, 10/11/2012 10:16:31",
+2012-10-11 06:16:31.6338,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Country_StateProvinces, no indexing will be performed, updating to 00000000-0000-0f00-0000-000000000001, 10/11/2012 10:16:31",
+2012-10-11 06:16:31.6538,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (Raven/Hilo/users),
+2012-10-11 06:16:31.7628,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'users/193', update: False, ",
+2012-10-11 06:16:31.7628,Raven.Database.DocumentDatabase,Debug,Put document users/193 with etag 00000000-0000-0f00-0000-000000000002,
+2012-10-11 06:16:31.7628,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: PUT users/193,
+2012-10-11 06:16:31.7628,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0210442,
+2012-10-11 06:16:31.7667,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: ReducingExecuter, will wait for additional work",
+2012-10-11 06:16:31.7667,Raven.Database.Server.HttpServer,Debug,Request #   4: POST    -    80 ms - Test       - 200 - /bulk_docs,
+2012-10-11 06:16:31.7858,Raven.Database.Server.HttpServer,Debug,"	PUT users/193
+",
+2012-10-11 06:16:32.0278,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/IndexedProperties/Raven/DocumentsByEntityName' was not found,
+2012-10-11 06:16:32.4469,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 0 documents for Raven/DocumentsByEntityName,
+2012-10-11 06:16:32.4558,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Aftering indexing 1 documents, the new last etag for is: 00000000-0000-0f00-0000-000000000001 for Raven/DocumentsByEntityName",
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 3 because: WORK BY IndexingExecuter,
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0f00-0000-000000000001,
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Country/StateProvinces/Index, no indexing will be performed, updating to 00000000-0000-0f00-0000-000000000002, 10/11/2012 10:16:31",
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Country_StateProvinces, no indexing will be performed, updating to 00000000-0000-0f00-0000-000000000002, 10/11/2012 10:16:31",
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-0f00-0000-000000000001",
+2012-10-11 06:16:32.4749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (users/193),
+2012-10-11 06:16:32.4749,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/IndexedProperties/Raven/DocumentsByEntityName' was not found,
+2012-10-11 06:16:32.6429,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on users/193 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: users/193
+	Tag I-: Users
+	LastModified I-: 2012-10-11T10:16:31.7620000
+",
+2012-10-11 06:16:32.9749,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 1 documents for Raven/DocumentsByEntityName,
+2012-10-11 06:16:32.9749,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Aftering indexing 1 documents, the new last etag for is: 00000000-0000-0f00-0000-000000000002 for Raven/DocumentsByEntityName",
+2012-10-11 06:16:32.9749,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 4 because: WORK BY IndexingExecuter,
+2012-10-11 06:16:32.9749,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: ReducingExecuter, will wait for additional work",
+2012-10-11 06:16:32.9828,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: IndexingExecuter, will wait for additional work",
+2012-10-11 06:31:35.3757,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-10-11 06:44:15.3503,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,

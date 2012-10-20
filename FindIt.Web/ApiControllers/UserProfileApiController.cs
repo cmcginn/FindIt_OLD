@@ -15,10 +15,12 @@ namespace FindIt.Web.ApiControllers
 
     public class UserProfileApiController : ApiController
     {
+        private readonly IStorage _storage;
         private readonly IWorkContext _workContext;
-        public UserProfileApiController()
+        public UserProfileApiController(IStorage storage)
         {
             _workContext = EngineContext.CurrentContext.WorkContext;
+            _storage = storage;
         }
         // GET api/<controller>
         public IEnumerable<string> Get()
@@ -30,7 +32,7 @@ namespace FindIt.Web.ApiControllers
         public UserProfile GetCurrentProfile()
         {
             UserProfile result = null;
-            using (var store = Storage.GetStore)
+            using (var store = _storage.DocumentStore)
             using (var session = store.OpenSession())
             {
                result = session.UserProfileByUserId(_workContext.User.Id);               

@@ -7,19 +7,26 @@ using System.Threading.Tasks;
 
 namespace FindIt.Data
 {
-    public class Storage
+    public class Storage : FindIt.Data.IStorage
     {
-        public static DocumentStore GetStore
+
+        private readonly DocumentStore _DocumentStore;
+
+        public DocumentStore DocumentStore
         {
             get
             {
-                var result = new DocumentStore();
-                result.Url = "http://Windows8:8080";
-                result.DefaultDatabase = "Test";
-                result.Initialize();
-                return result;
+                return _DocumentStore;
             }
         }
-    
+        public Storage()
+        {
+            _DocumentStore = new Raven.Client.Document.DocumentStore { ConnectionStringName = "RavenDB" };
+            _DocumentStore.DefaultDatabase = "Test";
+            _DocumentStore.Initialize();
+        }
+
+
+      
     }
 }

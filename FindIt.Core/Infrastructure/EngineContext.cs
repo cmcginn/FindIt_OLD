@@ -45,8 +45,9 @@ namespace FindIt.Core.Infrastructure
         }
         public void RegisterTypes()
         {
-            _Builder.RegisterType<WorkContext>().As<IWorkContext>().SingleInstance();
+            _Builder.RegisterType<WorkContext>().As<IWorkContext>().SingleInstance();            
             
         }
+        
     }
 }

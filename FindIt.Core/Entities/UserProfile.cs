@@ -10,11 +10,11 @@ namespace FindIt.Core.Entities
     {
         
         public string UserId { get; set; }
-        ICollection<SearchProfile> _SearchProfiles;
-        public ICollection<SearchProfile> SearchProfiles
+        ICollection<Query> _Queries;
+        public ICollection<Query> Queries
         {
-            get { return _SearchProfiles ?? (_SearchProfiles = new List<SearchProfile>()); }
-            set { _SearchProfiles = value; }
+            get { return _Queries ?? (_Queries = new List<Query>()); }
+            set { _Queries = value; }
         }
     }
 }

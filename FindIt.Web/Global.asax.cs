@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using FindIt.Core.Infrastructure;
+using FindIt.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace FindIt.Web
             engineContext.Builder = new ContainerBuilder();            
             engineContext.Builder.RegisterControllers(typeof(MvcApplication).Assembly);
             engineContext.Builder.RegisterApiControllers(typeof(System.Web.Http.ApiController).Assembly);
+            engineContext.Builder.RegisterType<Storage>().As<IStorage>().InstancePerDependency();
             engineContext.RegisterTypes();
             EngineContext.Container = engineContext.Builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));

@@ -21,9 +21,11 @@ namespace FindIt.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IWorkContext _workContext;
-        public AccountController(IWorkContext workContext)
+        private readonly IStorage _storage;
+        public AccountController(IWorkContext workContext, IStorage storage)
         {
             _workContext = workContext;
+            _storage = storage;
         }
         //
         // GET: /Account/Login
@@ -45,7 +47,7 @@ namespace FindIt.Web.Controllers
             ActionResult result = null;
             if (ModelState.IsValid)
             {
-                using(var store = Storage.GetStore)
+                using (var store = _storage.DocumentStore)
                 using (var session = store.OpenSession())
                 {
                     var user = session.Query<User>().SingleOrDefault(x => x.UserName == model.UserName && x.Password == model.Password);
@@ -60,7 +62,7 @@ namespace FindIt.Web.Controllers
                         result = RedirectToLocal(returnUrl);
                     }
                 }
-                
+
             }
             return result;
         }
@@ -99,14 +101,19 @@ namespace FindIt.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    using (var store = Storage.GetStore)
+                    using (var store = _storage.DocumentStore)
+
+
                     using (var session = store.OpenSession())
                     {
+
                         var user = new User { UserName = model.UserName, Password = model.Password };
                         session.Store(user);
                         session.SaveChanges();
-                        _workContext.User = user;
+                        //_workContext.User = user;
                     }
+
+
                     //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     //WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");

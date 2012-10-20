@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FindIt.Core.Entities
 {
     
-    public class StateProvince
+    public class StateProvince:BaseEntity
     {   
         public string Name { get; set; }
         public string Abbreviation { get; set; }
