@@ -1,34 +1,21 @@
 ﻿
 var profile = {
-    model:{
-        locations: null,
-        selectedLocations:null
-    },
-    mapping:{
-        'stateProvinces': {
-            create: function (options) {
-                
-                return options.data;
-            }
-        }
-    },
-    viewModel:null,
-    init: function () {
-        profile.loadModel();
-    },
-    loadModel: function () {
-        $.get('/api/CommonApi/GetCountries', function (result, state) {
-            profile.model.locations = result;
-            profile.onModelDataLoaded();
 
+    viewModel: null,
+    init: function () {
+        $('#btn_search').click(function () { profile.searchLocations(); });
+    },
+    searchLocations: function () {
+      
+        $.ajax({
+            url: 'http://api.geonames.org/searchJSON?q=' + $('#location_search').val() + '&featureClass=A&maxRows=10&username=demo121',
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                profile.viewModel = ko.mapping.fromJS(data);
+                ko.applyBindings(profile.viewModel);
+            }
         });
 
-    },
-    onModelDataLoaded:function(){
-        if (profile.model.locations != null) {
-            profile.viewModel = ko.mapping.fromJS(profile.model,profile.mapping);
-            ko.applyBindings(profile.viewModel);
-        }
     }
 }
 

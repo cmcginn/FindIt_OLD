@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\QueryExtensions.cs" />
-    <Compile Include="Indexes\Country_StateProvinces_Index.cs" />
+    <Compile Include="Indexes\CitiesIndex.cs" />
     <Compile Include="IStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage.cs" />

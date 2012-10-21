@@ -8,6 +8,7 @@ namespace FindIt.Web
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+            
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -21,6 +22,10 @@ namespace FindIt.Web
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                     "~/Scripts/knockout-2.1.0.js",
                      "~/Scripts/knockout-mapping.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/Content/smoothness/js").Include(
+                "~/Content/themes/smoothness/js/jquery-ui-1.9.0.custom.js"
                 ));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -44,10 +49,12 @@ namespace FindIt.Web
                         "~/Content/themes/base/jquery.ui.theme.css"
                         ));
 
-            
+
             bundles.Add(new StyleBundle("~/Content/yaml").Include(
                 "~/Content/yaml/core/base.css",
                 "~/Content/yaml/screen/screen-FULLPAGE-layout.css"));
+            bundles.Add(new StyleBundle("~/Content/smoothness/css").Include(
+                "~/Content/smoothness/css/smoothness/jquery-ui-1.9.0.custom.css"));
         }
     }
 }

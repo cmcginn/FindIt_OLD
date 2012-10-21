@@ -1,0 +1,36 @@
+﻿<h1>Locations</h1>
+
+<script id="city-template" type="text/html">
+
+    <div class="ym-grid">
+        <div class="ym-gl ym-g25">
+            <div class="ym-gbox">
+                <input type="checkbox" name="cityId" data-bind="value:Id" />
+            </div>
+        </div>
+        <div class="ym-gl ym-g25">
+            <div class="ym-gbox"><span data-bind="text:CityName"></span></div>
+        </div>
+        <div class="ym-gl ym-g25">
+            <div class="ym-gbox"><span data-bind="text:StateName"></span></div>
+        </div>
+        <div class="ym-gl ym-g25">
+            <div class="ym-gbox"><span data-bind="text:CountryCode"></span></div>
+        </div>
+    </div>
+</script>
+
+<div id="location_search">
+    <div>
+        <select id="country" name="country" data-bind="options: countries, optionsText:'CountryName', optionsValue:'CountryCode'"></select>
+    </div>
+    <div>
+        <select id="stateprovince" name="stateprovince" data-bind="options: stateprovinces, optionsText:'StateProvinceName', optionsValue:'StateProvinceCode',optionsCaption:'Select...'"></select>
+    </div>
+    <div>
+        <select id="cities" multiple="multiple" size="20" name="cities" data-bind="options:cities, optionsText:'CityName', optionsValue:'Id'"></select>
+    </div>
+    <div>
+        <input type="button" id="btn_save_cities" value="Save Cities" />
+    </div>
+</div>

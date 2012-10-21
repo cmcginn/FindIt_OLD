@@ -754,3 +754,8 @@ tr.pager td {
             margin: 0;
         }
 }
+/* location search 
+   ----------------------------------------------------------*/
+#location_search #cities {
+    width:300px;
+}

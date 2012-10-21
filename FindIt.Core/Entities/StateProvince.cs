@@ -9,8 +9,9 @@ namespace FindIt.Core.Entities
 {
     
     public class StateProvince:BaseEntity
-    {   
-        public string Name { get; set; }
-        public string Abbreviation { get; set; }
+    {
+        public string CountryCode { get; set; }
+        public string StateProvinceName { get; set; }
+        public string StateProvinceCode { get; set; }
     }
 }

@@ -36,6 +36,7 @@ namespace FindIt.Web.Controllers
 
         public ActionResult MyProfile()
         {
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return View();
         }
     }

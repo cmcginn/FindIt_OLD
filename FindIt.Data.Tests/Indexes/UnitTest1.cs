@@ -63,7 +63,7 @@ namespace FindIt.Data.Tests.Indexes
                 documentStore.Initialize();
                 using (var session = documentStore.OpenSession())
                 {
-                    var country = new Country { Name = "Test" };
+                    var country = new Country { CountryName = "Test" };
                     session.Store(country);
                     session.SaveChanges();
                 }

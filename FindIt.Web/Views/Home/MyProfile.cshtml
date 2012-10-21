@@ -4,19 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
-    <script src="~/Scripts/pages/profile.js"></script>
+
+    <script src="~/Scripts/pages/locations.js"></script>
+
 }
-
-<h2>MyProfile</h2>
-
-    <div class="ym-grid">
-        <div class="ym-g50 ym-gl">
-            <select style="width:200px" data-bind="options: locations,optionsText: function(item){ return item.Name();},selectedOptions:selectedLocations" size="5" multiple="true"></select>
-        </div>
-        <div class="ym-g50 ym-gl">
-            <input type="button" name="addLocation" value="&gt;" />
-            <input type="button" name="removeLocation" value="&lt;" />
-        </div>
-    </div>
-    
+@using (Ajax.BeginForm(new AjaxOptions()))
+{
+    @Html.Action("Index", "Common")
+   
+}
 
