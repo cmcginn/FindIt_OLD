@@ -1,8 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using FindIt.Core.Entities;
 using FindIt.Core.Infrastructure;
 using FindIt.Data;
+using FindIt.Web.Infrastructure;
+using RazorGenerator.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +15,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.WebPages;
+
 
 namespace FindIt.Web
 {
@@ -20,30 +25,38 @@ namespace FindIt.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
-       
+
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
 
+
+            var engineContext = EngineContext.CurrentContext;
+            engineContext.Builder = new ContainerBuilder();
+            engineContext.Builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            engineContext.Builder.RegisterType<Storage>().As<IStorage>().InstancePerHttpRequest();
+            engineContext.Builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            
+            engineContext.RegisterTypes();
+
+            var pluginManager = new FindItPluginManager(new Storage());
+            pluginManager.InitializePlugins();          
+            EngineContext.Container = engineContext.Builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(EngineContext.Container);
+
+
+            //var engine = new PrecompiledMvcEngine(typeof(System.Web.Mvc.PreApplicationStartCode).Assembly);
+            //ViewEngines.Engines.Add(engine);
+            //VirtualPathFactoryManager.RegisterVirtualPathFactory(engine);
+
+            AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            var engineContext = EngineContext.CurrentContext;
-            engineContext.Builder = new ContainerBuilder();            
-            engineContext.Builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            engineContext.Builder.RegisterApiControllers(typeof(System.Web.Http.ApiController).Assembly);
-            engineContext.Builder.RegisterType<Storage>().As<IStorage>().InstancePerDependency();
-            engineContext.RegisterTypes();
-            EngineContext.Container = engineContext.Builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));
-            engineContext.Builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            //var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-            //json.UseDataContractJsonSerializer = true;
+           
         }
-
-       
     }
 }

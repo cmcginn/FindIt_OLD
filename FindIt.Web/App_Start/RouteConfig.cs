@@ -18,6 +18,13 @@ namespace FindIt.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "Test",
+            //    url: "TestPlugin/Configure",
+            //    defaults: new { controller = "TestPlugin", action = "Configure" },
+            //    namespaces: new string[]{"TestPlugin.Controllers"}
+            //);
         }
     }
 }

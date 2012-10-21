@@ -34,6 +34,18 @@ namespace FindIt.Web.ApiControllers
             }
             return result;
         }
+
+        [AcceptVerbs("GET", "HEAD")]
+        public List<InstalledPlugin> GetInstalledQueryPlugins()
+        {
+            List<InstalledPlugin> result = null;
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+                result = session.Query<InstalledPlugin>().ToList();
+            }
+            return result;
+        }
         // GET api/<controller>/5
         public string Get(int id)
         {

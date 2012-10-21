@@ -73,7 +73,9 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Infrastructure\EngineContext.cs" />
+    <Compile Include="Entities\InstalledPlugin.cs" />
     <Compile Include="Infrastructure\IPlugin.cs" />
+    <Compile Include="Infrastructure\IPluginManager.cs" />
     <Compile Include="Infrastructure\IWorkContext.cs" />
     <Compile Include="Infrastructure\PluginAttribute.cs" />
     <Compile Include="Infrastructure\PluginManager.cs" />
@@ -84,7 +86,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FindIt.Core.Infrastructure
 {
-    public abstract class PluginManager
+    public abstract class PluginManager : IPluginManager
     {
         string _PluginPath;
         protected string PluginPath
@@ -26,12 +26,11 @@ namespace FindIt.Core.Infrastructure
                 _PluginPath = value;
             }
         }
-        private Dictionary<string, string> _InstalledPluginDictionary;
+        Dictionary<string, string> _InstalledPluginDictionary;
 
-        protected Dictionary<string, string> InstalledPluginDictionary
+        public Dictionary<string, string> InstalledPluginDictionary
         {
-            get { return _InstalledPluginDictionary; }
-            set { _InstalledPluginDictionary = value; }
+            get { return _InstalledPluginDictionary ?? (_InstalledPluginDictionary = new Dictionary<string, string>()); }         
         }
         public abstract void InitializePlugins();
       
