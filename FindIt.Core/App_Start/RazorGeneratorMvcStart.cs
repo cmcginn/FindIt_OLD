@@ -3,9 +3,9 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using RazorGenerator.Mvc;
 
-[assembly: WebActivator.PostApplicationStartMethod(typeof(TestPlugin.App_Start.RazorGeneratorMvcStart), "Start")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof(FindIt.Core.App_Start.RazorGeneratorMvcStart), "Start")]
 
-namespace TestPlugin.App_Start {
+namespace FindIt.Core.App_Start {
     public static class RazorGeneratorMvcStart {
         public static void Start() {
             var engine = new PrecompiledMvcEngine(typeof(RazorGeneratorMvcStart).Assembly) {

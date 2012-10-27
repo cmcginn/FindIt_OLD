@@ -1,5 +1,4 @@
 ﻿using FindIt.Core.Entities;
-using FindIt.Core.Infrastructure;
 using FindIt.Data;
 using System;
 using System.Collections.Generic;
@@ -15,30 +14,29 @@ namespace FindIt.Web.ApiControllers
 
     public class UserProfileApiController : ApiController
     {
-        private readonly IStorage _storage;
-        private readonly IWorkContext _workContext;
+        private readonly IStorage _storage;       
         public UserProfileApiController(IStorage storage)
         {
-            _workContext = EngineContext.CurrentContext.WorkContext;
+            
             _storage = storage;
         }
         // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return null;
+        //public IEnumerable<string> Get()
+        //{
+        //    return null;
            
-        }
-        [AcceptVerbs("GET","HEAD")]
-        public UserProfile GetCurrentProfile()
-        {
-            UserProfile result = null;
-            using (var store = _storage.DocumentStore)
-            using (var session = store.OpenSession())
-            {
-               result = session.UserProfileByUserId(_workContext.User.Id);               
-            }
-            return result;
-        }
+        //}
+        //[AcceptVerbs("GET","HEAD")]
+        //public UserProfile GetCurrentProfile()
+        //{
+        //    UserProfile result = null;
+        //    using (var store = _storage.DocumentStore)
+        //    using (var session = store.OpenSession())
+        //    {
+        //       result = session.UserProfileByUserId(_workContext.User.Id);               
+        //    }
+        //    return result;
+        //}
 
       
         // GET api/<controller>/5

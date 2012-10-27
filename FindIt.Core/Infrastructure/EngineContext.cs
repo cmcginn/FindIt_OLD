@@ -21,7 +21,10 @@ namespace FindIt.Core.Infrastructure
 
         public ContainerBuilder Builder
         {
-            get { return _Builder; }
+            get {
+
+                return _Builder ?? (_Builder = new ContainerBuilder());
+            }
             set { _Builder = value; }
         }
         private EngineContext() { }

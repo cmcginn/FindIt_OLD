@@ -30,25 +30,20 @@ namespace FindIt.Web
         {
 
 
-            var engineContext = EngineContext.CurrentContext;
-            engineContext.Builder = new ContainerBuilder();
+            var engineContext = EngineContext.CurrentContext;            
             engineContext.Builder.RegisterControllers(typeof(MvcApplication).Assembly);
             engineContext.Builder.RegisterType<Storage>().As<IStorage>().InstancePerHttpRequest();
             engineContext.Builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             
             engineContext.RegisterTypes();
 
-            var pluginManager = new FindItPluginManager(new Storage());
-            pluginManager.InitializePlugins();          
+
             EngineContext.Container = engineContext.Builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(EngineContext.Container);
 
-
-            //var engine = new PrecompiledMvcEngine(typeof(System.Web.Mvc.PreApplicationStartCode).Assembly);
-            //ViewEngines.Engines.Add(engine);
-            //VirtualPathFactoryManager.RegisterVirtualPathFactory(engine);
-
+            FindItPluginBootstrapper.Initialize();
+  
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
