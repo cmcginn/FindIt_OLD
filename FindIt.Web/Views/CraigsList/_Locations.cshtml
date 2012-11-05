@@ -1,0 +1,32 @@
+﻿<h1>Locations</h1>
+
+<script id="state-template" type="text/html">
+    <div style="clear:both"></div>
+    <div data-bind="foreach: AvailableStates.StateGroups">
+        <div class="state-group" data-bind="foreach: States">
+            <div class="state-header"><span class="state-name" data-bind="text: State.StateName,attr:{stateindex:State.StateIndex,groupindex:State.GroupIndex}"></span>&nbsp;(<span data-bind="text: State.CityCount"></span>)</div>
+            <div class="cities" data-bind="foreach:State.AvailableCities.CityGroups">
+                <div class="availablecities" data-bind="template:{name:'city-template',if:Cities}"></div>
+            </div>
+            
+        </div>
+    </div>
+    
+</script>
+<script id="city-template" type="text/html">   
+    <div class="city-group" data-bind="foreach: Cities">
+        <div class="ym-grid city">
+            <div class="ym-gl ym-g20">
+                <input type="checkbox" class="city-input" data-bind="{id:City.CityId,name:City.CityId,checked:City.Selected,attr:{'data-id':City.CityId}}"  />
+            </div>
+            <div class="ym-gl ym-g80">
+                <span data-bind="text: City.CityName"></span>
+            </div>
+        </div>
+        
+    </div>
+    <div style="clear:both"></div>
+</script>
+<div class="locations" data-bind="template:{name:'state-template'}"></div>
+
+

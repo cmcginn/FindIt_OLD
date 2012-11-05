@@ -208,7 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\CommonApiController.cs" />
+    <Compile Include="ApiControllers\CraigslistApiController.cs" />
     <Compile Include="ApiControllers\LocationController.cs" />
+    <Compile Include="ApiControllers\MockApiController.cs" />
     <Compile Include="ApiControllers\UserProfileApiController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\CraigsListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -247,6 +250,9 @@
     <Content Include="Content\smoothness\js\jquery-1.8.2.js" />
     <Content Include="Content\smoothness\js\jquery-ui-1.9.0.custom.js" />
     <Content Include="Content\smoothness\js\jquery-ui-1.9.0.custom.min.js" />
+    <Content Include="Content\styles\configure.css" />
+    <Content Include="Content\styles\locations.css" />
+    <Content Include="Content\styles\options.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -362,6 +368,9 @@
       <Generator>RazorGenerator</Generator>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\craigslist\configure.js" />
+    <Content Include="Scripts\craigslist\selections_old.js" />
+    <Content Include="Scripts\craigslist\locations.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -382,6 +391,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout-mapping.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\options.js" />
     <Content Include="Scripts\pages\locations.js" />
     <Content Include="Scripts\pages\profile.js" />
     <Content Include="Web.config">
@@ -427,6 +437,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\MyProfile.cshtml" />
     <Content Include="Views\Common\Index.cshtml" />
+    <Content Include="Views\CraigsList\Configure.cshtml" />
+    <Content Include="Views\CraigsList\Index.cshtml" />
+    <Content Include="Views\CraigsList\PublicInfo.cshtml" />
+    <Content Include="Views\CraigsList\List.cshtml" />
+    <Content Include="Views\CraigsList\Detail.cshtml" />
+    <Content Include="Views\CraigsList\_Locations.cshtml" />
+    <Content Include="Views\CraigsList\_Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

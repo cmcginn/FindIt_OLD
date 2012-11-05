@@ -1,0 +1,18 @@
+﻿.locations .ui-state-default, .locations .ui-widget-content .locations .ui-state-default, .locations .ui-widget-header, .locations .ui-state-default,.locations .ui-widget-content {
+    background-image:none;
+    border:none;
+    background-color:inherit;
+}
+
+.locations .state-group {
+    width:400px;    
+    float:left;
+}
+.locations .availablecities {
+    width:150px;
+    float:left;
+    
+}
+.locations .city {
+    height:27px;
+}

@@ -88,6 +88,9 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\CraigslistCategory.cs" />
+    <Compile Include="Entities\CraigslistCity.cs" />
+    <Compile Include="Entities\CraigslistGroup.cs" />
     <Compile Include="Entities\Query.cs" />
     <Compile Include="Entities\StateProvince.cs" />
     <Compile Include="Entities\User.cs" />

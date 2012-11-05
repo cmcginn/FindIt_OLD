@@ -12,5 +12,6 @@ namespace FindIt.Core.Entities
     {       
         public virtual string CountryName { get; set; }
         public virtual string CountryCode { get; set; }
+        public List<StateProvince> StateProvinces { get; set; }
     }
 }

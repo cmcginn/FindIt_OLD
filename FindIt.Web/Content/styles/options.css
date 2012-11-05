@@ -1,0 +1,18 @@
+﻿.options .ui-state-default, .options .ui-widget-content .options .ui-state-default, .options .ui-widget-header, .options .ui-state-default,.options .ui-widget-content {
+    background-image:none;
+    border:none;
+    background-color:inherit;
+}
+
+.options .selection-group {
+    width:400px;    
+    float:left;
+}
+.options .selection-sub-group {
+    width:150px;
+    float:left;
+    
+}
+.options .selection-item {
+    height:27px;
+}

@@ -63,17 +63,17 @@ namespace FindIt.Web.ApiControllers
             return result;
         }
 
-        [AcceptVerbs("GET", "HEAD")]
-        public IEnumerable<StateProvince> CountryStateProvince(string name)
-        {
-            List<StateProvince> result = null;
-            using (var store = _storage.DocumentStore)
-            using (var session = store.OpenSession())
-            {
-                result = session.Query<StateProvince>().Where(x => x.CountryCode == name).ToList();
-            }
-            return result;
-        }
+        //[AcceptVerbs("GET", "HEAD")]
+        //public IEnumerable<StateProvince> CountryStateProvince(string name)
+        //{
+        //    List<StateProvince> result = null;
+        //    using (var store = _storage.DocumentStore)
+        //    using (var session = store.OpenSession())
+        //    {
+        //        result = session.Query<StateProvince>().Where(x => x.CountryCode == name).ToList();
+        //    }
+        //    return result;
+        //}
 
         // GET api/<controller>
         public IEnumerable<Country> Get()
