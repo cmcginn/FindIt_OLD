@@ -1,24 +1,6 @@
-﻿<h1>Locations</h1>
-<script type="text/html" id="selections-template">
-
-    <div class="options-group" data-bind="foreach: Options">
-        <div class="options-group-header">
-            <span class="options-name" data-bind="{text:OptionName,attr:{optionIndex:Index}}"></span>
-        </div>
-        <div data-bind="foreach:SubOptions">
-            <div class="ym-grid">
-                <div class="ym-gl ym-g50">
-                    <input type="checkbox" data-bind="{value:Id}" />
-                </div>
-                <div class="ym-gr ym-g50">
-                    <span class="options-name" data-bind="{text:OptionName,attr:{optionIndex:Index}}"></span>
-                </div>
-            </div>
-        </div>
+﻿<h1 class="section-header">Locations</h1>
+<div class="section-content">
+    <div data-bind="with: Locations">
+        <div id="locations" class="options" data-bind="template:{name:'selections-template'}"></div>
     </div>
-
-</script>
-<div data-bind="with: Locations">
-    <div id="locations" class="options" data-bind="template:{name:'selections-template'}"></div>
 </div>
-

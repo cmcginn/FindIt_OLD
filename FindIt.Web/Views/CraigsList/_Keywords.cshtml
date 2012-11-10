@@ -1,0 +1,33 @@
+﻿<h1 class="section-header">Keywords</h1>
+<div class="section-content">
+<script type="text/html" id="keywords-template">
+    <div data-bind="foreach:Keywords">
+        <div class="ym-grid keyword">
+            <div class="ym-gl ym-g33">
+                <div class="ym-gl ym-g50">
+                    <span data-bind="text:Keyword.KeywordValue"></span>
+                </div>
+                <div class="ym-gr ym-g50">
+                    <span data-bind="text:Keyword.KeywordScore"></span>
+                </div>
+            </div>
+            <div class="ym-gr ym-g33">
+                <button class="ui-widget-button keywords-remove" data-bind="click:Keyword.remove"><span class="ui-icon ui-icon-closethick"></span></button>
+            </div>
+        </div>
+    </div>
+</script>
+
+    <div class="ym-grid">
+        <div class="ym-gl ym-g33">
+            <input type="text" id="new_keyword" placeholder="Keyword" />
+        </div>
+        <div class="ym-gl ym-g33">
+            <input type="text" value="Score" id="new_keyword_score" placeholder="Score" />
+        </div>
+        <div class="ym-gr ym-g33">
+            <button class="ui-widget-button keywords-add"><span class="ui-icon ui-icon-plusthick"></span></button>
+        </div>
+    </div>
+    <div id="keywords" class="options" data-bind="template:{name:'keywords-template'}"></div>
+</div>

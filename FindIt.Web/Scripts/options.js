@@ -1,10 +1,23 @@
-﻿function Options(options) {
-    this.Options = new Array();
-    for (var i = 0; i < options.length; i++) {
-        options[i].Index = i;
-        options[i].SubOptions = new Array();
-        this.Options.push(options[i]);
+﻿function OptionsModel(options) {
+    
+    this.OptionNameProperty = options.nameProperty;
+    this.OptionsIdProperty = options.idProperty;
+    this.OptionsUrl = options.optionsUrl;
+    this.OptionsCallback = options.parentCallback;
+    
+    this.LoadOptions = function () {
+        var cb = this.OptionsCallback;
+        var np = this.OptionNameProperty;
+        var ip = this.OptionsIdProperty;
+        $.get(this.OptionsUrl, function (data) {
+            var result = { Options: new Array() };
+            $(data).each(function (index) {
+                result.Options.push({ OptionName: $(this)[0][np], Index: $(this)[0][ip],SubOptions:new Array() });
+            });          
+            cb(result);
+        });
     }
+
 }
 
 function applyLayout(selector,selectionCallback) {

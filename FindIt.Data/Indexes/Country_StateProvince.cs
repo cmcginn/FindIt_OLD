@@ -15,6 +15,7 @@ namespace FindIt.Data.Indexes
             public string CountryId { get; set; }
             public string CountryCode { get; set; }            
             public string StateProvinceCode { get; set; }
+            public string StateProvinceName { get; set; }
 
         }
 
@@ -26,7 +27,9 @@ namespace FindIt.Data.Indexes
                                {
                                    CountryId = country.Id,
                                    CountryCode = country.CountryCode,                                   
-                                   StateProvinceCode = stateProvince.StateProvinceCode
+                                   StateProvinceCode = stateProvince.StateProvinceCode,
+                                   StateProvinceName = stateProvince.StateProvinceName
+                              
                                };
 
 
@@ -37,8 +40,8 @@ namespace FindIt.Data.Indexes
                                 {
                                     CountryId = g.First().CountryId,
                                     CountryCode = g.First().CountryCode,
-                                    StateProvinceCode = g.Key 
-
+                                    StateProvinceCode = g.Key,
+                                    StateProvinceName = g.First().StateProvinceName                                   
                                 };
             //Store("CountryCode", FieldStorage.Yes);
             //Store("StateProvinceCode",FieldStorage.Yes);

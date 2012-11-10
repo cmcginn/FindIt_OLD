@@ -41,8 +41,25 @@ namespace FindIt.Web.ApiControllers
             return result;
         }
         [AcceptVerbs("GET", "HEAD")]
+        public object CountryStateProvince(string countryCode)
+        {
+            object result = null;
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+                var query = session.Query<FindIt.Data.Indexes.Country_StateProvince.ReduceResult, FindIt.Data.Indexes.Country_StateProvince>()
+                .Where(x => x.CountryCode == countryCode);
+
+                result = query.ToList();
+            }
+            return result;
+        }
+
+        [AcceptVerbs("GET", "HEAD")]
         public IEnumerable<Country> Country(string name)
         {
+
+						
             List<Country> result = null;
             using (var store = _storage.DocumentStore)
             using (var session = store.OpenSession())

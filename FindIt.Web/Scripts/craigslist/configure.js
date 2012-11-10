@@ -9,26 +9,81 @@
 
 
 var configure = {
-    viewModel:null,
-    dataModel:{
-        Categories: null,
-        Locations:null
+    viewModel: null,
+    dataModel: {
+        Profile: {
+            ProfileInfo: { Title: null },
+            Keywords: null,
+            Categories: null,
+            Locations: null
+        }
     },
-    init: function () {
-        configure.dataModel.Categories = new Options(mockdata.listingOptions);
-        configure.dataModel.Locations = new Options(mockdata.locationOptions);
-        configure.viewModel = ko.mapping.fromJS(configure.dataModel);
-        ko.applyBindings(configure.viewModel);
+    removeKeyword: function (keyword) {
+        var newCollection = new Array();
+        $(configure.viewModel.Profile.Keywords()).each(function (index) {
+            if ($(this)[0].Keyword.KeywordValue != keyword)
+                newCollection.push($(this)[0]);
+        });
+        configure.viewModel.Profile.Keywords(newCollection);
+    },
+    addKeyword: function (event) {
+        configure.viewModel.Profile.Keywords.push({ 'Keyword': { 'KeywordValue': $('#new_keyword').val(), 'KeywordScore': $('#new_keyword_score').val(), 'remove': function () { configure.removeKeyword($(this)[0].Keyword.KeywordValue); } } });
+        $('.keywords-remove').last().button()
+        $('#new_keyword').val('');
+        $('#new_keyword_score').val('');
+    },
+    getLocations:function(callback){
+        var locations = new OptionsModel({
+            optionsUrl: 'http://localhost:15718/api/Location/CountryStateProvince?countryCode=US',
+            nameProperty: 'StateProvinceName',
+            idProperty: 'StateProvinceCode',
+            parentCallback: function (result) {
+                configure.dataModel.Profile.Locations = result;
+                callback();
+            }
+        });
+        locations.LoadOptions();
+    },
+    createViewModel:function()
+    {
+        configure.getLocations(function () {
+            configure.viewModel = ko.mapping.fromJS(configure.dataModel);
+            ko.applyBindings(configure.viewModel);
+        });
         
+        
+        //configure.dataModel.Profile.Keywords = new Array();
+        //configure.dataModel.Profile.Locations = new Options(mockdata.locationOptions);
+       // configure.viewModel = ko.mapping.fromJS(configure.dataModel);
+        
+    },
+    layout:function(){
+        $('.keywords-add').button().click(function (event) { configure.addKeyword(event); });
+
         applyLayout('#categories', function (itemindex) {
             var mockSuboptions = new Options(mockdata.listingOptions).Options;
-            configure.viewModel.Categories.Options()[itemindex].SubOptions(mockSuboptions);
+            configure.viewModel.Profile.Categories.Options()[itemindex].SubOptions(mockSuboptions);
         });
 
         applyLayout('#locations', function (itemindex) {
             var mockSuboptions = new Options(mockdata.locationOptions).Options;
-            configure.viewModel.Locations.Options()[itemindex].SubOptions(mockSuboptions);
+            configure.viewModel.Profile.Locations.Options()[itemindex].SubOptions(mockSuboptions);
         });
+        $("#sections").accordion(
+        {
+            collapsible: true,
+            autoHeight: false,
+            heightStyle: 'content',
+            active: false,
+            header: '.section-header'
+
+        });
+
+        $('#configure').show();
+    },
+    init: function () {
+        configure.createViewModel();
+        //configure.layout();       
     }
 }
 $(function () {
