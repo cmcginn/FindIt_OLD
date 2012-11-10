@@ -10,5 +10,23 @@
 @*<link href="~/Content/styles/locations.css" rel="stylesheet" />*@
 <link href="~/Content/styles/options.css" rel="stylesheet" />
 <link href="~/Content/styles/configure.css" rel="stylesheet" />
+<script type="text/html" id="selections-template">
+
+    <div class="options-group" data-bind="foreach: Options">
+        <div class="options-group-header">
+            <span class="options-name" data-bind="{text:OptionName,attr:{optionIndex:Index}}"></span>
+        </div>
+        <div data-bind="foreach:SubOptions">
+            <div class="ym-grid">
+                <div class="ym-gl ym-g50">
+                    <input type="checkbox" data-bind="{value:Id}" />
+                </div>
+                <div class="ym-gr ym-g50">
+                    <span class="options-name" data-bind="{text:OptionName,attr:{optionIndex:Index}}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 @Html.Partial("_Categories")
-@*@Html.Partial("_Locations")*@
+@Html.Partial("_Locations")
