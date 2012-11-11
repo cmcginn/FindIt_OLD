@@ -373,6 +373,7 @@
     <Content Include="Scripts\craigslist\configure_OLD.js" />
     <Content Include="Scripts\craigslist\selections_old.js" />
     <Content Include="Scripts\craigslist\locations.js" />
+    <Content Include="Scripts\extenders.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

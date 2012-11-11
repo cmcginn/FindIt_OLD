@@ -10,6 +10,7 @@
         States: new Array(),
         Groups: new Array(),
         Keywords: new Array(),
+        ChangedCities: new Array(),    
         ProfileName:null
     },
     mapping: {
@@ -25,17 +26,21 @@
                     AddCities: function (data) {
                         var items = new Array();
                         $(data[0].Cities).each(function (index) {
-                            items.push({
+                            var item = {
                                 Index: index,
                                 CityName: this.CityName,
-                                Selected: false
-                            });
+                                Selected: ko.observable(false)
+                            };
+                            item.Selected.subscribe(function () { configure.saveCity(item) });
+                            item.StateProvinceCode = data[0].StateProvinceCode;
+                            items.push(item);
                         });
                         this.Cities(items);
                     },
                     Selected: function () { configure.onStateSelected(this); }
                 };
                 configure.stateCount++;
+
                 return result;                
             }
         },
@@ -61,22 +66,7 @@
                 configure.groupCount++;
                 return result;
             }
-        },
-        'Keywords': {
-           
-            update: function (options) {
-                console.log(options);
-                var result = {                    
-                    KeywordValue:options.data.KeywordValue,
-                    KeywordScore: options.data.KeywordScore,
-                    Remove: function () {
-                        console.log(this);
-                    }
-                }
-                
-                return result;
-            }
-        }
+        }        
     },
     /*------------------- Event Handlers -------------------*/
     //detects when complete model has been bound
@@ -117,8 +107,7 @@
             configure.dataModel.Groups.push($(this));
         });
         configure.onDataReceived();
-    },
-   
+    },   
     /*------------------- Data Functions -------------------*/
     getStates: function () {
         $.get('http://localhost:15718/api/Location/CountryStateProvince?countryCode=US', function (data) {
@@ -147,8 +136,16 @@
             ko.applyBindingsToNode($('.categories')[group.Index], { template: { name: 'categories-template', data: group } });
         });
     },
+    saveCity:function(city){
+        $.ajax({
+            type: 'POST',
+            dataType:'json',
+            url:'http://localhost:15718/api/CraigslistApi/SaveCity',
+            data:city           
+            });
+    },
     addKeyword:function(){
-        configure.dataModel.Keywords.push({ KeywordValue: $('#new_keyword').val(), KeywordScore: $('#new_keyword_score').val(), Remove: function () { configure.removeKeyword(this) } });
+        configure.dataModel.Keywords.push({ KeywordValue: $('#new_keyword').val(), KeywordScore: ko.observable($('#new_keyword_score').val()).extend({numeric:0}), Remove: function () { configure.removeKeyword(this) } });
         configure.viewModel.Keywords(configure.dataModel.Keywords);
         $('.keywords-remove').last().button()
         $('#new_keyword').val('');

@@ -1,5 +1,6 @@
 ﻿using FindIt.Core.Entities;
 using FindIt.Data;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,14 @@ namespace FindIt.Web.ApiControllers
                 result = query.ToList();
             }
             return result;
+        }
+        [AcceptVerbs("POST")]
+        public void SaveCity(JObject data)
+        {
+            var stateProvinceCode = data["StateProvinceCode"].Value<string>();
+            var cityName = data["CityName"].Value<string>();
+            var selected = data["Selected"].Value<bool>();
+           
         }
         // GET api/<controller>
         public IEnumerable<string> Get()

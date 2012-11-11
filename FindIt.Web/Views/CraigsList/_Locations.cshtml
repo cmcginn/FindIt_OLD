@@ -5,7 +5,7 @@
             <div data-bind="foreach:Cities">
                 <div class="ym-grid" style="width: 250px; float: left">
                     <div class="ym-gl ym-g20">
-                        <input type="checkbox" data-bind="{value:Index,checked:Selected}" />
+                        <input type="checkbox" class="city-selection"  data-bind="{value:Index,checked:Selected}" />
                     </div>
                     <div class="ym-gr ym-g80">
                         <span class="options-name" data-bind="{text:CityName,attr:{optionIndex:Index}}"></span>
