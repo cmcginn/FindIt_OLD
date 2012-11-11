@@ -1,17 +1,22 @@
 ﻿var configure = {
-    stateCount:0,
-    viewModel: null,
-    
+    /*------------------- View Models and Mapping *-------------------*/
+    //keeps an count of model items for array indexing
+    stateCount: 0,
+    groupCount:0,
+    keywordCount:0,
+    viewModel: null,    
     //takes care of handling multiple callbacks constructs a model, THEN gets bound
     dataModel:{
-        States: new Array()
-       
+        States: new Array(),
+        Groups: new Array(),
+        Keywords: new Array(),
+        ProfileName:null
     },
     mapping: {
        
         'States': {            
             create: function (options) {
-                var self = this;
+               
                 var result = {
                     Index: configure.stateCount,
                     StateName: options.data[0].StateProvinceName,
@@ -33,22 +38,134 @@
                 configure.stateCount++;
                 return result;                
             }
+        },
+        'Groups': {
+            create: function (options) {
+                var result = {
+                    Index: configure.groupCount,
+                    GroupName: options.data[0].Name,
+                    Id: options.data[0].Id,
+                    Categories:new ko.observableArray(),
+                    AddCategories:function(data){
+                        var items = new Array();
+                        $(data).each(function (index) {
+                            items.push({
+                                Index: index,
+                                Name: this.Name,
+                                Selected:false
+                            });
+                        });
+                        this.Categories(items);
+                    }
+                };
+                configure.groupCount++;
+                return result;
+            }
+        },
+        'Keywords': {
+           
+            update: function (options) {
+                console.log(options);
+                var result = {                    
+                    KeywordValue:options.data.KeywordValue,
+                    KeywordScore: options.data.KeywordScore,
+                    Remove: function () {
+                        console.log(this);
+                    }
+                }
+                
+                return result;
+            }
         }
     },
-    onCitiesRendered:function(){
-        console.log('hide');
-    },
-    onStateSelected: function (index) {
-        //configure.viewModel.States()[0]
-        //get city data and bind to selected state
-        var sp = configure.viewModel.States()[index];
-        if (sp.Cities.length == 0) {
-            $.get('http://localhost:15718/api/Location/StateProvinceCity?name=' + sp.StateCode, function (data) {
-                sp.AddCities(data);
-                ko.applyBindingsToNode($('.cities')[index], { template: { name: 'cities-template', data: sp } });
-            });
+    /*------------------- Event Handlers -------------------*/
+    //detects when complete model has been bound
+    onDataReceived: function () {
+        if (configure.dataModel.States.length > 0 &&
+            configure.dataModel.Groups.length>0) {
+            configure.viewModel = ko.mapping.fromJS(configure.dataModel, configure.mapping);
+            ko.applyBindings(configure.viewModel);
+            configure.applyKeywordsLayout();
+            configure.applyStateLayout();
+            configure.applyGroupLayout();
+            configure.applyConfigureLayout();
         }
     },
+    onStatesReceived: function (data) {
+      
+        //turn into generic options with selected event
+        $(data).each(function () {
+            //turn int viewmodel state with select
+            configure.dataModel.States.push($(this));
+        });
+        configure.onDataReceived();        
+        
+    },
+    onStateSelected: function (index) {       
+        //if this is the first time a state is selected get cities
+        var stateProvince = configure.viewModel.States()[index];
+        if (stateProvince.Cities.length == 0)
+            configure.getCities(stateProvince);
+    },
+    onGroupSelected: function (index) {
+        var group = configure.viewModel.Groups()[index];
+        if (group.Categories.length == 0)
+            configure.getCategories(group);
+    },
+    onGroupsReceived:function(data){
+        $(data).each(function () {
+            configure.dataModel.Groups.push($(this));
+        });
+        configure.onDataReceived();
+    },
+   
+    /*------------------- Data Functions -------------------*/
+    getStates: function () {
+        $.get('http://localhost:15718/api/Location/CountryStateProvince?countryCode=US', function (data) {
+            configure.onStatesReceived(data);
+
+        })
+    },
+    getCities: function (stateProvince) {        
+            $.get('http://localhost:15718/api/Location/StateProvinceCity?name=' + stateProvince.StateCode, function (data) {
+                stateProvince.AddCities(data);
+                //apply binding to just our cities node
+                ko.applyBindingsToNode($('.cities')[stateProvince.Index], { template: { name: 'cities-template', data: stateProvince } });
+            });        
+    },
+    //craigslist groups
+    getGroups:function()
+    {
+        $.get('http://localhost:15718/api/CraigslistApi/CraigslistGroups',function(data){
+            configure.onGroupsReceived(data);
+        });
+    },
+    getCategories:function(group){
+        $.get('http://localhost:15718/api/CraigslistApi/GetCategories?groupId=' + group.Id,function(data){
+            group.AddCategories(data);
+            //apply binding to just our craigslist group node
+            ko.applyBindingsToNode($('.categories')[group.Index], { template: { name: 'categories-template', data: group } });
+        });
+    },
+    addKeyword:function(){
+        configure.dataModel.Keywords.push({ KeywordValue: $('#new_keyword').val(), KeywordScore: $('#new_keyword_score').val(), Remove: function () { configure.removeKeyword(this) } });
+        configure.viewModel.Keywords(configure.dataModel.Keywords);
+        $('.keywords-remove').last().button()
+        $('#new_keyword').val('');
+        $('#new_keyword_score').val('');
+
+    },
+    removeKeyword: function (keyword) {
+        var removeAt = configure.viewModel.Keywords.indexOf(keyword);
+        configure.dataModel.Keywords = new Array();
+        $(configure.viewModel.Keywords()).each(function (index) {
+            if (index != removeAt)
+                configure.dataModel.Keywords.push(this);
+        });
+        configure.viewModel.Keywords(configure.dataModel.Keywords);
+        
+    },
+    /*------------------- UI------------------*/
     //apply parent options accordion layout to states
     applyStateLayout:function(){
         $('.state').accordion({            
@@ -65,35 +182,38 @@
             }
         });
     },
-    //detects when complete model has been bound
-    onDataReceived:function()
-    {
-        if (configure.dataModel.States.length > 0) {
-            configure.viewModel = ko.mapping.fromJS(configure.dataModel, configure.mapping);
-            ko.applyBindings(configure.viewModel);
-            configure.applyStateLayout();
-        }
-    },
-    //event handlers
-
-    onStatesReceived: function (data) {
-      
-        //turn into generic options with selected event
-        $(data).each(function (index) {
-            //turn int viewmodel state with select
-            configure.dataModel.States.push($(this));
+    applyGroupLayout:function(){
+        $('.group').accordion({
+            collapsible: true,
+            autoHeight: false,
+            heightStyle: 'content',
+            active: false,
+            icons: { 'header': 'ui-icon-triangle-1-e' },
+            beforeActivate: function (event, ui) {
+                //only when expanding
+                if (ui.newHeader.length == 1) {
+                    configure.onGroupSelected(parseFloat($(event.currentTarget).attr('index')));
+                }
+            }
         });
-        configure.onDataReceived();        
-        
     },
-    getStates: function () {
-        $.get('http://localhost:15718/api/Location/CountryStateProvince?countryCode=US', function (data) {
-            configure.onStatesReceived(data);
-
-        })
+    applyKeywordsLayout:function(){
+        $('.keywords-add').button().click(function (event) { configure.addKeyword(event); });
     },
+    applyConfigureLayout:function(){
+        $('#configure .section').accordion({
+            header: '.section-header',
+            collapsible: true,
+            autoHeight: false,
+            heightStyle: 'content',
+            active: false,
+        });
+        $('#configure').show();
+    },
+    /*------------------- Utility------------------*/
     init: function () {
         configure.getStates();
+        configure.getGroups();
     }
 }
 $(function () {

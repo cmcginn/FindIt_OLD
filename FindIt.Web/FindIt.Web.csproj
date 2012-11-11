@@ -232,6 +232,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\shared\images\ajax-loader.gif" />
     <Content Include="Content\smoothness\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\smoothness\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\smoothness\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -369,6 +370,7 @@
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\craigslist\configure.js" />
+    <Content Include="Scripts\craigslist\configure_OLD.js" />
     <Content Include="Scripts\craigslist\selections_old.js" />
     <Content Include="Scripts\craigslist\locations.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />

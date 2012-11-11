@@ -1,7 +1,31 @@
-﻿<h1 class="section-header">Categories</h1>
-<div class="section-content">
-    <div data-bind="with: Categories">
-        <div id="categories" class="options" data-bind="template:{name:'selections-template'}"></div>
+﻿<div class="section">
+    <h1 class="section-header">Categories</h1>
+    <div>
+        <script type="text/html" id="categories-template">
+            <div data-bind="foreach:Categories">
+                <div class="ym-grid" style="width: 250px; float: left">
+                    <div class="ym-gl ym-g20">
+                        <input type="checkbox" data-bind="{value:Index,checked:Selected}" />
+                    </div>
+                    <div class="ym-gr ym-g80">
+                        <span class="options-name" data-bind="{text:Name,attr:{optionIndex:Index}}"></span>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script type="text/html" id="groups-template">
+            <div data-bind="foreach:Groups">
+                <div class="group">
+                    <h3 data-bind="{text:GroupName,attr:{index:Index}}"></h3>
+                    <div class="categories">
+                        <div class="loader-image" style="width: 100%; text-align: center">
+                            <img src="@Url.Content("~/Content/shared/images/ajax-loader.gif")" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </script>
+        <div data-bind="template:{name:'groups-template'}"></div>
     </div>
 </div>
-

@@ -16,7 +16,30 @@ namespace FindIt.Web.ApiControllers
         {
             _storage = storage;
         }
-
+        [AcceptVerbs("GET", "HEAD")]
+        public object CraigslistGroups()
+        {
+            object result = null;
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+                var query = session.Query<CraigslistGroup>();
+                result = query.ToList();
+            }
+            return result;
+        }
+        [AcceptVerbs("GET", "HEAD")]
+        public object GetCategories(string groupId)
+        {
+            object result = null;
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+                var query = session.Query<CraigslistCategory>().Where(x => x.Group.Id == groupId);
+                result = query.ToList();
+            }
+            return result;
+        }
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
