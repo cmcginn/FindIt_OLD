@@ -4,23 +4,23 @@
 @section scripts{
 
     @*    <script src="~/Scripts/craigslist/locations.js"></script>*@
-    <script src="~/Scripts/options.js"></script>
+    <script src="~/Scripts/optionsModel.js"></script>
     <script src="~/Scripts/craigslist/configure.js"></script>
 }
 @*<link href="~/Content/styles/locations.css" rel="stylesheet" />*@
 <link href="~/Content/styles/options.css" rel="stylesheet" />
 <link href="~/Content/styles/configure.css" rel="stylesheet" />
-<div id="configure" class="ui-helper-hidden">
+<div id="configure" >
     <script type="text/html" id="selections-template">
 
-        <div class="options-group" data-bind="foreach: Options">
+        <div class="options-group" data-bind="foreach: Options">           
             <div class="options-group-header">
                 <span class="options-name" data-bind="{text:OptionName,attr:{optionIndex:Index}}"></span>
             </div>
             <div data-bind="foreach:SubOptions">
                 <div class="ym-grid">
                     <div class="ym-gl ym-g50">
-                        <input type="checkbox" data-bind="{value:Id}" />
+                        <input type="checkbox" data-bind="{value:Index}" />
                     </div>
                     <div class="ym-gr ym-g50">
                         <span class="options-name" data-bind="{text:OptionName,attr:{optionIndex:Index}}"></span>
@@ -30,12 +30,14 @@
         </div>
     </script>
 
-    <div id="sections" data-bind="with:Profile">
+@*    <div id="sections" data-bind="with:Profile">
 
         @Html.Partial("_ProfileInfo")
         @Html.Partial("_Keywords")
         @Html.Partial("_Categories")
         @Html.Partial("_Locations")
 
-    </div>
+    </div>*@
+    
 </div>
+  @Html.Partial("_Locations")

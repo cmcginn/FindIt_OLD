@@ -19,15 +19,19 @@ namespace FindIt.Web.ApiControllers
         }
 
         [AcceptVerbs("GET", "HEAD")]
-        public IEnumerable<City> StateProvinceCity(string name)
+        public object StateProvinceCity(string name)
         {
-            List<City> result = null;
+            object result = null;
             using (var store = _storage.DocumentStore)
             using (var session = store.OpenSession())
             {
-                result = session.Advanced.LuceneQuery<City>().Search("StateCode", String.Format("{0}", name)).GroupBy(x=>x.CityName).Select(x=>x.First()).ToList();
+                var query = session.Query<FindIt.Data.Indexes.StateProvince_City.ReduceResult, FindIt.Data.Indexes.StateProvince_City>()
+                    .Where(x => x.StateProvinceCode == name);
+                result = query.ToList();
             }
             return result;
+
+
         }
         [AcceptVerbs("GET", "HEAD")]
         public IEnumerable<StateProvince> StateProvince(string name)
