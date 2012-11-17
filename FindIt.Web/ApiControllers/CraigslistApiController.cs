@@ -57,7 +57,18 @@ namespace FindIt.Web.ApiControllers
         {
             return new string[] { "value1", "value2" };
         }
+        [AcceptVerbs("GET","HEAD")]
+        public object LoadDto()
+        {
+            var result = new {
+                SelectedCities=new List<string>(),
+                SelectedCategories=new List<string>(),
+                Keywords=new List<KeyValuePair<string,int>>(),
+                ProfileName=String.Empty
+            };
 
+            return result;
+        }
         //// GET api/<controller>
         //public IEnumerable<StateProvince> GetStates()
         //{

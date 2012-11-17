@@ -13,6 +13,7 @@
         ChangedCities: new Array(),    
         ProfileName:null
     },
+    dto:null,
     mapping: {
        
         'States': {            
@@ -28,6 +29,7 @@
                         $(data[0].Cities).each(function (index) {
                             var item = {
                                 Index: index,
+                                Id:this.Id,
                                 CityName: this.CityName,
                                 Selected: ko.observable(false)
                             };
@@ -54,11 +56,14 @@
                     AddCategories:function(data){
                         var items = new Array();
                         $(data).each(function (index) {
-                            items.push({
+                            var item = {
+                                Id:this.Id,
                                 Index: index,
                                 Name: this.Name,
-                                Selected:false
-                            });
+                                Selected: ko.observable(false)
+                            }
+                            item.Selected.subscribe(function () { configure.saveCategory(item) });
+                            items.push(item);
                         });
                         this.Categories(items);
                     }
@@ -72,7 +77,7 @@
     //detects when complete model has been bound
     onDataReceived: function () {
         if (configure.dataModel.States.length > 0 &&
-            configure.dataModel.Groups.length>0) {
+            configure.dataModel.Groups.length > 0 && configure.dto != null) {
             configure.viewModel = ko.mapping.fromJS(configure.dataModel, configure.mapping);
             ko.applyBindings(configure.viewModel);
             configure.applyKeywordsLayout();
@@ -107,8 +112,18 @@
             configure.dataModel.Groups.push($(this));
         });
         configure.onDataReceived();
-    },   
+    },
+    onDtoReceived: function (data) {
+        console.log(data);
+    },
     /*------------------- Data Functions -------------------*/
+    loadDto:function(){
+        $.get('http://localhost:15718/api/CraigslistApi/LoadDto', function (data) {
+            configure.dto = data;
+            configure.onDataReceived();
+        });
+
+    },
     getStates: function () {
         $.get('http://localhost:15718/api/Location/CountryStateProvince?countryCode=US', function (data) {
             configure.onStatesReceived(data);
@@ -136,16 +151,43 @@
             ko.applyBindingsToNode($('.categories')[group.Index], { template: { name: 'categories-template', data: group } });
         });
     },
-    saveCity:function(city){
+    saveCategory: function (category) {
+        var index = configure.dto.SelectedCategories.indexOf(category.Id);
+        if (category.Selected()) {
+            if (index == -1)
+                configure.dto.SelectedCategories.push(category.Id);
+        } else {
+            if(index > -1)
+                configure.dto.SelectedCategories.splice(configure.dto.SelectedCategories.indexOf(category.Id), 1);
+        }
+    },
+    saveCity: function (city) {
+        var index = configure.dto.SelectedCities.indexOf(city.StateProvinceCode+'/'+city.CityName);
+        if (city.Selected()) {
+            if (index == -1)
+                configure.dto.SelectedCities.push(city.StateProvinceCode + '/' + city.CityName);
+
+        } else {
+            if (index > -1) {
+                configure.dto.SelectedCities.splice(configure.dto.SelectedCities.indexOf(city.StateProvinceCode + '/' + city.CityName), 1);
+            }
+        }
+    },
+    saveProfile:function(){
+        configure.dto.ProfileName = configure.viewModel.ProfileName();
+        $(configure.viewModel.Keywords()).each(function () {
+            configure.dto.Keywords.push({ 'Key': $(this)[0].KeywordValue, 'Value': $(this)[0].KeywordScore });
+        });
         $.ajax({
             type: 'POST',
             dataType:'json',
-            url:'http://localhost:15718/api/CraigslistApi/SaveCity',
-            data:city           
-            });
+            url:'http://localhost:15718/api/CraigslistApi/StoreSession',
+            data: configure.dto
+        });            
     },
     addKeyword:function(){
         configure.dataModel.Keywords.push({ KeywordValue: $('#new_keyword').val(), KeywordScore: ko.observable($('#new_keyword_score').val()).extend({numeric:0}), Remove: function () { configure.removeKeyword(this) } });
+
         configure.viewModel.Keywords(configure.dataModel.Keywords);
         $('.keywords-remove').last().button()
         $('#new_keyword').val('');
@@ -205,12 +247,18 @@
             heightStyle: 'content',
             active: false,
         });
+
+        $('#save').button();
+        $('#save').click(function (event) {
+            configure.saveProfile();
+        });
         $('#configure').show();
     },
     /*------------------- Utility------------------*/
     init: function () {
         configure.getStates();
         configure.getGroups();
+        configure.loadDto();
     }
 }
 $(function () {
