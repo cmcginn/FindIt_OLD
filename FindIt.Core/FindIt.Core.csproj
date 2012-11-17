@@ -85,13 +85,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="Entities\ApplicationSession.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\CraigslistCategory.cs" />
     <Compile Include="Entities\CraigslistCity.cs" />
     <Compile Include="Entities\CraigslistGroup.cs" />
+    <Compile Include="Entities\CraigslistQuery.cs" />
     <Compile Include="Entities\Query.cs" />
+    <Compile Include="Entities\QueryProfile.cs" />
     <Compile Include="Entities\StateProvince.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />

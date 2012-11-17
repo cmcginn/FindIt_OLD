@@ -1,6 +1,10 @@
-﻿<div class="section">
-    <h1 class="section-header">Profile Info</h1>
+﻿<script type="text/html" id="profile-info-template">
     <div class="section-content">
-        <input type="text" name="profileInfo" placeholder="Profile Title" data-bind="{value:ProfileName}" />      
+        <input type="text" id="profile_name" name="profileInfo" placeholder="Profile Title" data-bind="{value:ProfileName}" />      
     </div>
+</script>
+
+<div class="section" id="profile">
+    <h1 class="section-header">Profile Info</h1>
+    <div id="profile-info" data-bind="template:{name:'profile-info-template'}"></div>
 </div>

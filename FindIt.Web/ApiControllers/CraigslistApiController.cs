@@ -1,4 +1,5 @@
 ﻿using FindIt.Core.Entities;
+using FindIt.Core.Infrastructure;
 using FindIt.Data;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,9 +14,11 @@ namespace FindIt.Web.ApiControllers
     public class CraigslistApiController : ApiController
     {
         private readonly IStorage _storage;
-        public CraigslistApiController(IStorage storage)
+        private readonly IWorkContext _workContext;
+        public CraigslistApiController(IStorage storage,IWorkContext workContext)
         {
             _storage = storage;
+            _workContext = workContext;
         }
         [AcceptVerbs("GET", "HEAD")]
         public object CraigslistGroups()
@@ -86,6 +89,57 @@ namespace FindIt.Web.ApiControllers
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
+        }
+        [AcceptVerbs("GET","HEAD")]
+        public object LoadSession()
+        {
+            object result = null;
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+
+                var appSession = session.Load<ApplicationSession>("ApplicationSessions/97");
+                result = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(appSession.SessionData);
+            }
+            return result;
+        }
+        [AcceptVerbs("POST")]
+        public void StoreSession(JObject data)
+        {
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+
+                var appSession = session.Load<ApplicationSession>("ApplicationSessions/97");
+                appSession.SessionData = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                session.SaveChanges();
+                    
+               
+            }
+        }
+        [AcceptVerbs("POST", "HEAD")]
+        public void PostProfile(string name)
+        {
+
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+                var existing = session.Query<QueryProfile>().SingleOrDefault(x => x.Name == name);
+                if (existing != null)
+                {
+                    existing.Name = name;
+                }
+                else
+                {
+                    var profile = new QueryProfile
+                    {
+                        UserId = "users/65",
+                        Name = name
+                    };
+                    session.Store(profile);
+                }
+                session.SaveChanges();
+            }
         }
     }
 }

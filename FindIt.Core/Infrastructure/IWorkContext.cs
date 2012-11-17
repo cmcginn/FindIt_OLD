@@ -10,5 +10,6 @@ namespace FindIt.Core.Infrastructure
     public interface IWorkContext
     {
         User User { get; set; }
+        string UserApplicationSessionId { get; set; }
     }
 }

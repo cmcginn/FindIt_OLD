@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FindIt.Data.Extensions;
+using Newtonsoft.Json.Linq;
 namespace FindIt.Web.ApiControllers
 {
     public class CommonApiController : ApiController
@@ -17,9 +18,11 @@ namespace FindIt.Web.ApiControllers
         {
             _storage = storage;
         }
-      
-       
+        [AcceptVerbs("POST")]
+        public void SaveApplicationSession(JObject data)
+        {
 
+        }
         // GET api/<controller>
         public IEnumerable<string> Get()
         {

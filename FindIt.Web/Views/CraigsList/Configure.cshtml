@@ -11,10 +11,15 @@
 <link href="~/Content/styles/options.css" rel="stylesheet" />
 <link href="~/Content/styles/configure.css" rel="stylesheet" />
 <div id="configure" class="ui-helper-hidden">
-        
-        @Html.Partial("_ProfileInfo")
-        @Html.Partial("_Keywords")
-        @Html.Partial("_Categories")
-        @Html.Partial("_Locations")
+
+    @Html.Partial("_ProfileInfo")
+    @Html.Partial("_Keywords")
+    @Html.Partial("_Categories")
+    @Html.Partial("_Locations")
+
+    <div>
+        <input type="button" id="save" value="Save" />
+    </div>
+
 </div>
 

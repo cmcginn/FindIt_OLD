@@ -9,6 +9,6 @@ namespace FindIt.Core.Infrastructure
     public class WorkContext:IWorkContext
     {
         public Entities.User User { get; set; }
-       
+        public string UserApplicationSessionId { get; set; } 
     }
 }
