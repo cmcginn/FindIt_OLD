@@ -129,5 +129,17 @@ namespace FindIt.Web.ApiControllers
         public void Delete(int id)
         {
         }
+
+        [AcceptVerbs("GET","HEAD")]
+        public object GetCountry(string name = null)
+        {
+            object result = null;
+            using (var store = _storage.DocumentStore)
+            using (var session = store.OpenSession())
+            {
+                result = session.Query<Country>().ToList();
+            }
+            return result;
+        }
     }
 }

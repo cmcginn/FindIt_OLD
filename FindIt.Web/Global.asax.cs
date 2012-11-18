@@ -39,6 +39,7 @@ namespace FindIt.Web
 
 
             EngineContext.Container = engineContext.Builder.Build();
+
             DependencyResolver.SetResolver(new AutofacDependencyResolver(EngineContext.Container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(EngineContext.Container);
 
@@ -51,7 +52,7 @@ namespace FindIt.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-           
+            EngineContext.Container.Resolve<IWorkContext>().User = new User { Id = "users/33", UserName="Static Test User" };
         }
     }
 }

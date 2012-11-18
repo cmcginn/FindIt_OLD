@@ -16,5 +16,10 @@ namespace FindIt.Web.Controllers
             return PartialView();
         }
 
+        public ActionResult QueryProfile()
+        {
+            return View();
+        }
+
     }
 }

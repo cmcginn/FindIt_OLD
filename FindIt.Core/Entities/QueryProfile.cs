@@ -10,5 +10,13 @@ namespace FindIt.Core.Entities
     {
         public string UserId { get; set; }
         public virtual string Name { get; set; }
+        List<string> _Locations;
+
+        public List<string> Locations
+        {
+            get { return _Locations ?? (_Locations = new List<string>()); }
+            set { _Locations = value; }
+        }
+        
     }
 }

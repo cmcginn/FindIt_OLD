@@ -211,6 +211,7 @@
     <Compile Include="ApiControllers\CraigslistApiController.cs" />
     <Compile Include="ApiControllers\LocationController.cs" />
     <Compile Include="ApiControllers\MockApiController.cs" />
+    <Compile Include="ApiControllers\QueryProfileApiController.cs" />
     <Compile Include="ApiControllers\UserProfileApiController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -449,6 +450,8 @@
     <Content Include="Views\CraigsList\_Categories.cshtml" />
     <Content Include="Views\CraigsList\_Keywords.cshtml" />
     <Content Include="Views\CraigsList\_ProfileInfo.cshtml" />
+    <Content Include="Views\Common\_Locations.cshtml" />
+    <Content Include="Views\Common\QueryProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

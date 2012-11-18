@@ -88,6 +88,7 @@
     <Compile Include="Entities\ApplicationSession.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\CodeName.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\CraigslistCategory.cs" />
     <Compile Include="Entities\CraigslistCity.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Entities\InstalledPlugin.cs" />
+    <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Infrastructure\EngineContext.cs" />
     <Compile Include="Infrastructure\IWorkContext.cs" />
     <Compile Include="Infrastructure\WorkContext.cs" />
