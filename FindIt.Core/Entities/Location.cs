@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FindIt.Core.Entities
 {
-    public class CodeName
+    public class Location:BaseEntity
     {
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; } 
     }
 }

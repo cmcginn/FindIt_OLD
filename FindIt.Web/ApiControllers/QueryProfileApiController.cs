@@ -61,9 +61,9 @@ namespace FindIt.Web.ApiControllers
             return result;
         }
         [AcceptVerbs("GET", "HEAD")]
-        public List<CodeName> GetCountries()
+        public List<Location> GetCountries()
         {
-            List<CodeName> result = null;
+            List<Location> result = null;
             using (var store = _storage.DocumentStore)
             using (var session = store.OpenSession())
             {
@@ -87,7 +87,7 @@ namespace FindIt.Web.ApiControllers
                     if (codeIndex.Count() == 1)
                         result = session.Advanced.LuceneQuery<CodeName, FindIt.Data.Indexes.CountryStateProvinces>().Search("Code", qString).ToList();
                     else if (codeIndex.Count() == 2)
-                        result = session.Advanced.LuceneQuery<CodeName, FindIt.Data.Indexes.StateProvinceCities>().Search("Code", qString).ToList();
+                        result = session.Advanced.LuceneQuery<CodeName, FindIt.Data.Indexes.StateProvinceCities_OLD>().Search("Code", qString).ToList();
                    
                 }
             }

@@ -74,11 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\QueryExtensions.cs" />
-    <Compile Include="Indexes\Countries.cs" />
-    <Compile Include="Indexes\CountryStateProvinces.cs" />
-    <Compile Include="Indexes\Country_StateProvince.cs" />
-    <Compile Include="Indexes\StateProvinceCities.cs" />
-    <Compile Include="Indexes\StateProvince_City.cs" />
+    <Compile Include="Indexes\AllCountries.cs" />
+    <Compile Include="Indexes\CountryProvincesQuery.cs" />
+    <Compile Include="Indexes\AllLocationsQuery.cs" />
+    <Compile Include="Indexes\StateProvinceCities_OLD.cs" />
     <Compile Include="IStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage.cs" />
